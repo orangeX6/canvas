@@ -7,7 +7,13 @@ canvas {
   background-color: antiquewhite;
 }
 
-ul {
-  display: flex;
-  list-style: none;
-}
+/* body {
+  background-color: #999;
+  padding: 0;
+  margin: 0;
+} */
+
+/* 
+#canvas {
+  display: block;
+} */
