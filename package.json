@@ -1,0 +1,26 @@
+{
+  "name": "canvas",
+  "version": "1.0.0",
+  "description": "This repo contains starter files and final code for all sections and projects contained in the course.",
+  "main": "index.js",
+  "scripts": {
+    "start": "run-script-os",
+    "start:win32": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js, !node_modules/**/*' --directory --port 7777 --browser \"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\"",
+    "//": "Hello! If you are having trouble running this command. Try changing Firefox Developer Edition to FirefoxDeveloperEdition",
+    "start:darwin:linux": "browser-sync start --server --files '**/*.css, **/*.html, **/*.js, !node_modules/**/*' --directory --port 7777 --browser 'Chrome Dev'",
+    "build": "parcel build index.html"
+  },
+  "author": "Pranav",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.27.5",
+    "parcel": "^2.2.0",
+    "run-script-os": "^1.1.5"
+  },
+  "dependencies": {
+    "follow-redirects": "^1.14.7",
+    "leaflet": "^1.7.1",
+    "lodash-es": "^4.17.21",
+    "node": "^17.3.0"
+  }
+}
