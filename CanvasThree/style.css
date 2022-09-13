@@ -4,16 +4,6 @@ body {
 
 canvas {
   /* border: 2px solid black; */
-  background-color: antiquewhite;
+  /* background-color: #f28552; */
+  background-color: azure;
 }
-
-/* body {
-  background-color: #999;
-  padding: 0;
-  margin: 0;
-} */
-
-/* 
-#canvas {
-  display: block;
-} */

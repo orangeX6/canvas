@@ -1,30 +1,44 @@
-// ------ ACTUAL PROJECT ------\\
 import Circle from './circle.js';
+import MouseHover from './mouseHover.js';
 
 const canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext('2d');
-
+let mouse;
 const circleArray = [];
-for (let i = 0; i < 269; i++) {
+for (let i = 0; i < 969; i++) {
   circleArray.push(new Circle());
 }
 
-// const trailBlaze = [];
-// for (let i = 0; i < 25; i++) {
-//   trailBlaze.push(
-//     new Circle(12, `rgba(255,0,0,${i / 25})`, 500 + i * 2, 500 + i * 2, 3, 3)
-//   );
-// }
+// const init = () => {
+//   circleArray.splice(0);
+//   for (let i = 0; i < 669; i++) {
+//     circleArray.push(new Circle());
+//   }
+// };
 
-function animate() {
-  // requestAnimationFrame(animate);
+const animate = () => {
+  requestAnimationFrame(animate);
   ctx.clearRect(0, 0, innerWidth, innerHeight);
 
-  circleArray.forEach(circle => circle.update());
-  // trailBlaze.forEach((circle, index) => circle.update());
-}
+  circleArray.forEach(circle => circle.update(mouse));
+};
 
-setInterval(animate, 10);
+// setInterval(animate, 10);
+const onMouseMove = e => {
+  mouse = new MouseHover(e.x, e.y);
+  // console.log(mouse);
+};
+
+window.addEventListener('mousemove', onMouseMove);
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  // init();
+});
+
+// init();
+animate();
