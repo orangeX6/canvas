@@ -1,17 +1,10 @@
 export default class Circle {
-  #colorArr = [
-    '#e8eaea',
-    '#8089ff',
-    '#73e67a',
-    '#1290dd',
-    '#7cf0d6',
-    '#427aff',
-  ];
+  #colorArr = ['#F2059F', '#04B2D9', '#04D94F', '#F2CB05', '#F28705'];
 
   ctx = canvas.getContext('2d');
 
   constructor(radius, color, x, y, velocityX, velocityY) {
-    this.radius = radius || 20;
+    this.radius = radius || Math.random() * 12;
     this.x =
       x || Math.random() * (window.innerWidth - this.radius * 2) + this.radius;
     this.y =

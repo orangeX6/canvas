@@ -8,7 +8,7 @@ canvas.height = window.innerHeight;
 const ctx = canvas.getContext('2d');
 
 const circleArray = [];
-for (let i = 0; i < 269; i++) {
+for (let i = 0; i < 300; i++) {
   circleArray.push(new Circle());
 }
 
@@ -28,3 +28,8 @@ function animate() {
 }
 
 setInterval(animate, 10);
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
