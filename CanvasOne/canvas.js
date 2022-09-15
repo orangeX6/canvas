@@ -1,19 +1,21 @@
-const brushWidth = document.getElementById('dtool');
+const brushWidth = document.getElementById("dtool");
+const nav = document.querySelector(".nav");
+const navHeight = nav.getBoundingClientRect().height;
 
 let x = 2;
 for (let i = 0; i < 5; i++) {
-  const opt = document.createElement('option');
+  const opt = document.createElement("option");
   opt.value = Math.pow(x, i);
   opt.innerHTML = Math.pow(x, i);
   brushWidth.appendChild(opt);
 }
 
-const canvas = document.getElementById('canvas');
-window.addEventListener('load', () => {
-  const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("canvas");
+window.addEventListener("load", () => {
+  const ctx = canvas.getContext("2d");
 
   //resizing canvas
-  canvas.height = window.innerHeight - 50;
+  canvas.height = window.innerHeight - 50 - navHeight;
   canvas.width = window.innerWidth - 10;
 
   //Fill
@@ -33,7 +35,7 @@ window.addEventListener('load', () => {
   // ctx.closePath();
   // ctx.stroke();
 
-  brushWidth.addEventListener('change', function () {
+  brushWidth.addEventListener("change", function () {
     ctx.lineWidth = this.value;
   });
 
@@ -50,10 +52,10 @@ window.addEventListener('load', () => {
     ctx.beginPath();
   };
 
-  const draw = e => {
-    console.log(e);
+  const draw = (e) => {
+    // console.log(e);
     if (!painting) return;
-    ctx.lineWidth = ctx.lineCap = 'round';
+    ctx.lineWidth = ctx.lineCap = "round";
     ctx.lineTo(e.clientX, e.clientY - 20);
     ctx.stroke();
     ctx.beginPath();
@@ -61,12 +63,12 @@ window.addEventListener('load', () => {
   };
 
   //  Event Listeners
-  canvas.addEventListener('mousedown', startPosition);
-  canvas.addEventListener('mouseup', finishedPainting);
-  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener("mousedown", startPosition);
+  canvas.addEventListener("mouseup", finishedPainting);
+  canvas.addEventListener("mousemove", draw);
 });
 
-window.addEventListener('resize', () => {
+window.addEventListener("resize", () => {
   canvas.height = window.innerHeight - 10;
   canvas.width = window.innerWidth - 10;
 });

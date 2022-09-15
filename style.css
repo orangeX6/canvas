@@ -18,7 +18,12 @@
 } */
 
 body {
-  margin: 0;
+  margin: 8vh 0;
+  height: 84vh;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  background: url(scattered-forcefields.svg);
 }
 
 canvas {
@@ -39,10 +44,13 @@ ul {
 }
 
 .tab {
-  color: rgb(11, 58, 144);
+  color: rgb(230, 230, 230);
   font-size: x-large;
-  font-family: fantasy;
-  background-color: hsl(112, 100%, 77%);
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  backdrop-filter: blur(3px);
   padding: 3vh;
   margin-right: 3vh;
 }
