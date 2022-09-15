@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  background-color: floralwhite;
+}
+
+nav > ul {
+  background-color: floralwhite;
+  /* background-color: #37e6dd; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 5px;
+}
+a {
+  color: rgb(119, 119, 119);
+  font-size: x-large;
+  margin-left: 4rem;
+  font-family: fantasy;
+}
