@@ -23,7 +23,7 @@ const init = () => {
 
 const animate = () => {
   requestAnimationFrame(animate);
-  ctx.fillStyle = 'rgba(255,255,255,0.05';
+  ctx.fillStyle = 'rgba(255,255,255,0.06';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   particles.forEach((particle) => particle.update(mouse));
 };

@@ -8,6 +8,7 @@ export default class Particle {
   #yPos;
   #distance;
   #velocity = 0.05;
+  #lastMouseCoords = {};
 
   ctx = canvas.getContext('2d');
 
@@ -16,8 +17,11 @@ export default class Particle {
     this.y = y;
     this.#xPos = x;
     this.#yPos = y;
-
-    this.#distance = randomIntFromRange(50, 120);
+    this.#lastMouseCoords = {
+      x: x,
+      y: y,
+    };
+    this.#distance = randomIntFromRange(60, 130);
     this.#radians = Math.random() * Math.PI * 2;
     this.radius = radius || randomIntFromRange(1, 3);
     this.color = color || randomColor(this.#color);
@@ -39,12 +43,16 @@ export default class Particle {
       y: this.y,
     };
 
-    // Move points over  time
+    //# Move points over  time
     this.#radians += this.#velocity;
 
-    // Creating Circular Motion
-    this.x = mouse.x + Math.cos(this.#radians) * this.#distance;
-    this.y = mouse.y + Math.sin(this.#radians) * this.#distance;
+    //# Drag Effect
+    this.#lastMouseCoords.x += (mouse.x - this.#lastMouseCoords.x) * 0.1;
+    this.#lastMouseCoords.y += (mouse.y - this.#lastMouseCoords.y) * 0.1;
+
+    //# Creating Circular Motion
+    this.x = this.#lastMouseCoords.x + Math.cos(this.#radians) * this.#distance;
+    this.y = this.#lastMouseCoords.y + Math.sin(this.#radians) * this.#distance;
 
     // console.log(mouse);
 
