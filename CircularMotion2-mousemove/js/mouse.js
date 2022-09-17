@@ -3,8 +3,8 @@ export default class MouseXY {
   #y;
 
   constructor(x, y) {
-    this.#x = x;
-    this.#y = y;
+    this.x = x;
+    this.y = y;
   }
 
   get x() {
@@ -13,5 +13,13 @@ export default class MouseXY {
 
   get y() {
     return this.#y;
+  }
+
+  set x(value) {
+    this.#x = value;
+  }
+
+  set y(value) {
+    this.#y = value;
   }
 }

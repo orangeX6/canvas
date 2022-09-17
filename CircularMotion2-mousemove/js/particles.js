@@ -16,10 +16,7 @@ export default class Particle {
     this.y = y;
     this.#xPos = x;
     this.#yPos = y;
-    // this.#distance = {
-    //   x: randomIntFromRange(50, 120),
-    //   y: randomIntFromRange(50, 120),
-    // };
+
     this.#distance = randomIntFromRange(50, 120);
     this.#radians = Math.random() * Math.PI * 2;
     this.radius = radius || randomIntFromRange(1, 3);
@@ -29,26 +26,14 @@ export default class Particle {
   draw(lastCoords) {
     this.ctx.beginPath();
     this.ctx.lineWidth = this.radius;
-    // this.ctx.lineWidth = this.ctx.lineCap = 'round';
     this.ctx.moveTo(lastCoords.x, lastCoords.y);
     this.ctx.lineTo(this.x, this.y);
     this.ctx.strokeStyle = this.color;
     this.ctx.stroke();
     this.ctx.closePath();
-
-    // #trial
-    // this.ctx.beginPath();
-    // this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    // this.ctx.save();
-    // this.ctx.globalAlpha = this.#opacity;
-    // this.ctx.fillStyle = this.color;
-    // this.ctx.fill();
-    // this.ctx.restore();
-    // this.ctx.strokeStyle = this.color;
-    // this.ctx.stroke();
   }
 
-  update() {
+  update(mouse) {
     const lastCoords = {
       x: this.x,
       y: this.y,
@@ -58,9 +43,10 @@ export default class Particle {
     this.#radians += this.#velocity;
 
     // Creating Circular Motion
-    this.x = this.#xPos + Math.cos(this.#radians) * this.#distance;
-    this.y = this.#yPos + Math.sin(this.#radians) * this.#distance;
-    // console.log(Math.cos(this.#radians));
+    this.x = mouse.x + Math.cos(this.#radians) * this.#distance;
+    this.y = mouse.y + Math.sin(this.#radians) * this.#distance;
+
+    // console.log(mouse);
 
     this.draw(lastCoords);
   }

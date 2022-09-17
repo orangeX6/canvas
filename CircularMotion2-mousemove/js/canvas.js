@@ -6,7 +6,12 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - 2.1;
 
 const ctx = canvas.getContext('2d');
-let mouse;
+// const mouse = {
+//   x: 0,
+//   y: 0,
+// };
+
+let mouse = new Mouse(canvas.width / 2, canvas.height / 2);
 
 const particles = [];
 const init = () => {
@@ -18,11 +23,9 @@ const init = () => {
 
 const animate = () => {
   requestAnimationFrame(animate);
-  // ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = 'rgba(255,255,255,0.05';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  particles.forEach((particle) => particle.update());
-  // console.log(particles[0]);
+  particles.forEach((particle) => particle.update(mouse));
 };
 
 window.addEventListener('resize', () => {
@@ -32,7 +35,8 @@ window.addEventListener('resize', () => {
 });
 
 window.addEventListener('mousemove', (e) => {
-  mouse = new Mouse(e.x, e.y);
+  mouse.x = e.x;
+  mouse.y = e.y;
 });
 
 init();
