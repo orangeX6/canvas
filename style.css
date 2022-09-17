@@ -18,8 +18,8 @@
 } */
 
 body {
-  margin: 8vh 0;
-  height: 84vh;
+  padding: 8vh 0;
+  /* height: 100vh; */
   /* display: flex; */
   /* align-items: center; */
   /* justify-content: center; */
