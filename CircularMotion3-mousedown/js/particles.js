@@ -3,11 +3,11 @@ import { randomIntFromRange, randomColor } from './helper.js';
 export default class Particle {
   #opacity = 0.5;
   #radians;
-  #color = ['#00bdff', '#0DD9F3', '#088eff', '#04D939', '#03A63C', '#DBF227'];
+  #color = ['#f0e9ca', '#43a9e7', '#3c86d4', '#3447bb', '#abbcef', '#DBF227'];
   #xPos;
   #yPos;
   #distance;
-  #velocity = 0.01;
+  #velocity = 0.001;
 
   ctx = canvas.getContext('2d');
 
@@ -20,7 +20,7 @@ export default class Particle {
     //   x: randomIntFromRange(50, 120),
     //   y: randomIntFromRange(50, 120),
     // };
-    this.#distance = randomIntFromRange(20, 700);
+    this.#distance = randomIntFromRange(20, 1000);
     this.#radians = Math.random() * Math.PI * 2;
     this.radius = radius || randomIntFromRange(1, 4);
     this.color = color || randomColor(this.#color);
@@ -29,7 +29,8 @@ export default class Particle {
   draw(lastCoords) {
     this.ctx.beginPath();
     this.ctx.lineWidth = this.radius;
-    // this.ctx.lineWidth = this.ctx.lineCap = 'round';
+
+    this.ctx.lineCap = 'round';
     this.ctx.moveTo(lastCoords.x, lastCoords.y);
     this.ctx.lineTo(this.x, this.y);
     this.ctx.strokeStyle = this.color;
@@ -48,13 +49,24 @@ export default class Particle {
     // this.ctx.stroke();
   }
 
-  update() {
+  update(mouseDown = false) {
+    // this.#velocity = velocity;
+    console.log('VELOCITY DECREASE ' + this.#velocity);
+
     const lastCoords = {
       x: this.x,
       y: this.y,
     };
 
     // Move points over  time
+    if (mouseDown && this.#velocity < 0.012) {
+      this.#velocity += 0.0001;
+      console.log('VELOCITY INCREASE ' + this.#velocity);
+    } else if (!mouseDown && this.#velocity > 0.001) {
+      this.#velocity -= 0.0001;
+      console.log('VELOCITY DECREASE ' + this.#velocity);
+    }
+
     this.#radians += this.#velocity;
 
     // Creating Circular Motion

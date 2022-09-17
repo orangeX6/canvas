@@ -11,7 +11,7 @@ let mouse;
 const particles = [];
 const init = () => {
   particles.splice(0);
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 900; i++) {
     particles.push(new Particle(canvas.width / 2, canvas.height / 2));
   }
   setTimeout(() => {
@@ -19,12 +19,25 @@ const init = () => {
   }, 300);
 };
 
+let reqId;
 const animate = () => {
-  requestAnimationFrame(animate);
+  if (reqId) cancelAnimationFrame(reqId);
+  reqId = requestAnimationFrame(animate);
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'rgba(18,18,18,0.69';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  particles.forEach((particle) => particle.update(false));
+  // console.log(particles[0]);
+};
+
+const rotate = () => {
+  if (reqId) cancelAnimationFrame(reqId);
+  reqId = requestAnimationFrame(rotate);
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = 'rgba(18,18,18,0.08';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  particles.forEach((particle) => particle.update());
+  particles.forEach((particle) => particle.update(true));
   // console.log(particles[0]);
 };
 
@@ -34,9 +47,8 @@ window.addEventListener('resize', () => {
   init();
 });
 
-window.addEventListener('mousemove', (e) => {
-  mouse = new Mouse(e.x, e.y);
-});
+window.addEventListener('mouseup', animate);
+window.addEventListener('mousedown', rotate);
 
 init();
 animate();
