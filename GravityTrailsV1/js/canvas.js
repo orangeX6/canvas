@@ -11,7 +11,7 @@ let mouse;
 const particles = [];
 const init = () => {
   particles.splice(0);
-  for (let i = 0; i < 900; i++) {
+  for (let i = 0; i < 1080; i++) {
     particles.push(new Particle(canvas.width / 2, canvas.height / 2));
   }
   setTimeout(() => {
@@ -24,8 +24,9 @@ const animate = () => {
   if (reqId) cancelAnimationFrame(reqId);
   reqId = requestAnimationFrame(animate);
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'rgba(18,18,18,0.69';
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = 'rgba(18,18,18,0.69)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   particles.forEach((particle) => particle.update(false));
   // console.log(particles[0]);
@@ -35,7 +36,8 @@ const rotate = () => {
   if (reqId) cancelAnimationFrame(reqId);
   reqId = requestAnimationFrame(rotate);
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'rgba(18,18,18,0.08';
+
+  ctx.fillStyle = 'rgba(10,10,10,0.08)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   particles.forEach((particle) => particle.update(true));
   // console.log(particles[0]);

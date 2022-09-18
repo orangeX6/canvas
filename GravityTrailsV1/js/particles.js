@@ -3,7 +3,8 @@ import { randomIntFromRange, randomColor } from './helper.js';
 export default class Particle {
   #opacity = 0.5;
   #radians;
-  #color = ['#f0e9ca', '#43a9e7', '#3c86d4', '#3447bb', '#abbcef', '#DBF227'];
+  // #color = ['#f0e9ca', '#43a9e7', '#3c86d4', '#3447bb', '#abbcef', '#DBF227'];
+  #color = ['#fe5464', '#fe8cb3', '#D9D9D9', '#A6A6A6', '#8C8C8C', '#F2F2F2'];
   #xPos;
   #yPos;
   #distance;
@@ -16,13 +17,11 @@ export default class Particle {
     this.y = y;
     this.#xPos = x;
     this.#yPos = y;
-    // this.#distance = {
-    //   x: randomIntFromRange(50, 120),
-    //   y: randomIntFromRange(50, 120),
-    // };
-    this.#distance = randomIntFromRange(20, 1000);
+
+    // this.#distance = randomIntFromRange(20, window.innerWidth / 2);
+    this.#distance = randomIntFromRange(20, 1080);
     this.#radians = Math.random() * Math.PI * 2;
-    this.radius = radius || randomIntFromRange(1, 4);
+    this.radius = radius || Math.random() * 4;
     this.color = color || randomColor(this.#color);
   }
 
@@ -33,25 +32,15 @@ export default class Particle {
     this.ctx.lineCap = 'round';
     this.ctx.moveTo(lastCoords.x, lastCoords.y);
     this.ctx.lineTo(this.x, this.y);
+    // this.ctx.shadowColor = this.color;
+    // this.ctx.shadowBlur = 5;
     this.ctx.strokeStyle = this.color;
     this.ctx.stroke();
     this.ctx.closePath();
-
-    // #trial
-    // this.ctx.beginPath();
-    // this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    // this.ctx.save();
-    // this.ctx.globalAlpha = this.#opacity;
-    // this.ctx.fillStyle = this.color;
-    // this.ctx.fill();
-    // this.ctx.restore();
-    // this.ctx.strokeStyle = this.color;
-    // this.ctx.stroke();
   }
 
   update(mouseDown = false) {
     // this.#velocity = velocity;
-    console.log('VELOCITY DECREASE ' + this.#velocity);
 
     const lastCoords = {
       x: this.x,
@@ -60,11 +49,9 @@ export default class Particle {
 
     // Move points over  time
     if (mouseDown && this.#velocity < 0.012) {
-      this.#velocity += 0.0001;
-      console.log('VELOCITY INCREASE ' + this.#velocity);
-    } else if (!mouseDown && this.#velocity > 0.001) {
-      this.#velocity -= 0.0001;
-      console.log('VELOCITY DECREASE ' + this.#velocity);
+      this.#velocity += 0.0002;
+    } else if (!mouseDown && this.#velocity > 0.002) {
+      this.#velocity -= 0.0006;
     }
 
     this.#radians += this.#velocity;
