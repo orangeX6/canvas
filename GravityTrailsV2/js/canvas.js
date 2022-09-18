@@ -1,6 +1,7 @@
 import Particle from './particles.js';
+
 import Mouse from './mouse.js';
-import { randomIntFromRange, getDistance } from './helper.js';
+import { colorPalettes, getDistance } from './helper.js';
 
 const canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
@@ -11,22 +12,19 @@ const particles = [];
 let radians = 0;
 let alpha = 1;
 let mouseDown = false;
-const colorPalettes = [
-  ['#f0e9ca', '#43a9e7', '#3c86d4', '#3447bb', '#abbcef', '#DBF227'],
-  ['#fe5464', '#fe8cb3', '#D9D9D9', '#A6A6A6', '#8C8C8C', '#F2F2F2'],
-  ['#37e6dd', '#0AA605', '#F2B705', '#F25C05', '#F21616'],
-];
-const color = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
 
+const color = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
+console.log(color);
 // Init function
 const init = () => {
   particles.splice(0);
 
   for (let i = 0; i < 1080; i++) {
-    const canvasWidth = canvas.width + 300;
-    const canvasHeight = canvas.height + 400;
-    const x = Math.random() * canvasWidth - canvasWidth / 2;
-    const y = Math.random() * canvasHeight - canvasHeight / 2;
+    const largerSide =
+      (canvas.width > canvas.height ? canvas.width : canvas.height) + 300;
+
+    const x = Math.random() * largerSide - largerSide / 2;
+    const y = Math.random() * largerSide - largerSide / 2;
     particles.push(new Particle(x, y, color));
   }
 };
