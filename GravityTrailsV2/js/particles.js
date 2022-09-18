@@ -8,7 +8,7 @@ export default class Particle {
   constructor(x, y, color, radius) {
     this.x = x || Math.random() * canvas.width;
     this.y = y || Math.random() * canvas.height;
-    this.radius = radius || Math.random() * 2;
+    this.radius = radius || Math.random() * 2.5;
 
     this.color = randomColor(color) || randomColor(this.#color);
   }

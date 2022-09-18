@@ -21,7 +21,7 @@ const init = () => {
 
   for (let i = 0; i < 1080; i++) {
     const largerSide =
-      (canvas.width > canvas.height ? canvas.width : canvas.height) + 300;
+      canvas.width > canvas.height ? canvas.width : canvas.height;
 
     const x = Math.random() * largerSide - largerSide / 2;
     const y = Math.random() * largerSide - largerSide / 2;
