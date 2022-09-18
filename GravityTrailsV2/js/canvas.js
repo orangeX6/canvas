@@ -14,7 +14,7 @@ let alpha = 1;
 let mouseDown = false;
 
 const color = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
-console.log(color);
+// console.log(color);
 // Init function
 const init = () => {
   particles.splice(0);
@@ -40,10 +40,13 @@ const animate = () => {
   ctx.rotate(radians);
   particles.forEach((particle) => particle.update());
   ctx.restore();
-  radians += 0.008;
+  radians += 0.002;
 
-  if (mouseDown && alpha > 0.03) alpha -= 0.01;
-  if (!mouseDown && alpha < 1) alpha += 0.01;
+  if (mouseDown) radians += 0.005;
+  if (mouseDown && alpha > 0.03) alpha -= 0.009;
+  if (!mouseDown && alpha < 1) {
+    alpha += 0.002;
+  }
 };
 
 window.addEventListener('mousedown', () => {

@@ -54,3 +54,7 @@ ul {
   padding: 3vh;
   margin-right: 3vh;
 }
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0);
+}

@@ -8,7 +8,7 @@ export default class Particle {
   constructor(x, y, color, radius) {
     this.x = x || Math.random() * canvas.width;
     this.y = y || Math.random() * canvas.height;
-    this.radius = radius || Math.random() * 3;
+    this.radius = radius || Math.random() * 2;
 
     this.color = randomColor(color) || randomColor(this.#color);
   }
@@ -17,7 +17,7 @@ export default class Particle {
     this.ctx.beginPath();
     this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     this.ctx.shadowColor = this.color;
-    this.ctx.shadowBlur = 12;
+    this.ctx.shadowBlur = 10;
     this.ctx.fillStyle = this.color;
     this.ctx.fill();
     this.ctx.closePath();
