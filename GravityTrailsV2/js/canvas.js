@@ -5,7 +5,7 @@ import { colorPalettes, getDistance } from './helper.js';
 
 const canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight - 3.6;
+canvas.height = window.innerHeight;
 
 const ctx = canvas.getContext('2d');
 const particles = [];
@@ -58,7 +58,7 @@ window.addEventListener('mouseup', () => {
 
 window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight - 3.6;
+  canvas.height = window.innerHeight;
   init();
 });
 
