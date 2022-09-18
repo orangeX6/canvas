@@ -1,3 +1,4 @@
+import { randomColor } from './utils.js';
 export default class Ball {
   #colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
   #gravity = 0.4;
@@ -15,7 +16,8 @@ export default class Ball {
       radius ||
       Math.random() * (this.#maxRadius - this.#minRadius) + this.#minRadius;
     this.color =
-      color || this.#colors[Math.floor(Math.random() * this.#colors.length)];
+      randomColor(color) ||
+      this.#colors[Math.floor(Math.random() * this.#colors.length)];
     this.velocityX = velocityX || Math.random() * 4 - 2;
     this.velocityY = velocityY || Math.random();
   }

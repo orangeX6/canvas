@@ -1,4 +1,4 @@
-import { randomIntFromRange } from './utils.js';
+import { randomIntFromRange, colorPalettes } from './utils.js';
 import Ball from './ball.js';
 // import MouseHover from "./mouse";
 
@@ -14,11 +14,12 @@ const minBounceHeight = 400;
 const balls = [];
 function init() {
   balls.splice(0);
+  const color = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
   for (let i = 0; i < 666; i++) {
     let x = randomIntFromRange(maxRadius, canvas.width - maxRadius);
     let y = randomIntFromRange(0, minBounceHeight);
     let velX = randomIntFromRange(-2, 2);
-    balls.push(new Ball(x, y, velX));
+    balls.push(new Ball(x, y, velX, 0, 0, color));
   }
 }
 
@@ -26,7 +27,7 @@ function init() {
 function animate() {
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  balls.forEach(ball => ball.update());
+  balls.forEach((ball) => ball.update());
 }
 
 addEventListener('resize', () => {
