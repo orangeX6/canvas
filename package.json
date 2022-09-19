@@ -18,9 +18,8 @@
     "run-script-os": "^1.1.5"
   },
   "dependencies": {
+    "dat.gui": "^0.7.9",
     "follow-redirects": "^1.14.7",
-    "leaflet": "^1.7.1",
-    "lodash-es": "^4.17.21",
     "node": "^17.3.0"
   }
 }
