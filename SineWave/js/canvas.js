@@ -12,7 +12,7 @@ const wave = {
   y: canvas.height / 2,
   length: 0.01,
   amplitude: 150,
-  frequency: 0.01,
+  frequency: 0.05,
 };
 
 const strokeColor = {

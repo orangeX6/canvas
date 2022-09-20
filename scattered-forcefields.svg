@@ -10,7 +10,7 @@
             <stop offset='1' stop-color='#FC0'/>
         </linearGradient>
     </defs>
-    <g fill='#FFF' fill-opacity='0' stroke-miterlimit='10'>
+    <g fill='#32f8ff' fill-opacity='0' stroke-miterlimit='10'>
         <g stroke='url(#a)' stroke-width='2'>
             <path transform='translate(0 0)' d='M1409 581 1450.35 511 1490 581z'/>
             <circle stroke-width='4' transform='rotate(0 800 450)' cx='500' cy='100' r='40'/>

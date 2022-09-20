@@ -57,7 +57,7 @@ ul {
 .tab {
   color: rgb(230, 230, 230);
   font-size: x-large;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(125, 125, 125, 0.2);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   backdrop-filter: blur(5px);
@@ -65,7 +65,7 @@ ul {
 }
 
 .tab:hover {
-  background: rgba(255, 255, 255, 0);
+  background: rgba(255, 255, 255, 0.005);
   backdrop-filter: blur(0.5px);
 }
 
