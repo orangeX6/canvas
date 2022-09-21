@@ -58,8 +58,8 @@ export default class Particle {
     this.#radians += this.#velocity;
 
     // Creating Circular Motion
-    this.x = this.#xPos + Math.cos(this.#radians) * this.#distance;
-    this.y = this.#yPos + Math.sin(this.#radians) * this.#distance;
+    this.x = this.#xPos + Math.sin(this.#radians) * this.#distance;
+    this.y = this.#yPos + Math.cos(this.#radians) * this.#distance;
     // console.log(Math.cos(this.#radians));
 
     this.draw(lastCoords);
