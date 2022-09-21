@@ -10,13 +10,8 @@ const ctx = canvas.getContext('2d');
 const particles = [];
 const mouse = new Mouse(canvas.width / 2, canvas.height / 2);
 
-// Init function
-const init = () => {
-  // particles.splice(0);
-};
-
 const animate = () => {
-  particles.length > 4800 ? particles.splice(0, 1600) : '';
+  // particles.length > 4800 ? particles.splice(0, 1600) : '';
   requestAnimationFrame(animate);
 
   ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
@@ -28,7 +23,6 @@ const animate = () => {
   });
 };
 
-init();
 animate();
 
 addEventListener('resize', () => {
