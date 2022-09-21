@@ -17,6 +17,7 @@ let angle = 0;
 let hue = 0;
 let timer = 0;
 
+//-------------------------------------------------------
 // #DAT gui
 const settings = {
   baseRadius: 3,
@@ -38,6 +39,7 @@ particleFolder.add(settings, 'baseType', 1, 3, 1);
 
 particleFolder.open();
 
+//-------------------------------------------------------
 //# INITIALIZE
 // # play around with baseRadius, particleCount for cool effects
 const init = () => {
@@ -62,7 +64,7 @@ const init = () => {
         baseType === 1
           ? baseRadius - radiusIncrement * i
           : baseType === 2
-          ? baseRadius + radiusIncrement * i
+          ? 5 + radiusIncrement * i
           : baseRadius,
         `hsl(${hue},75%,60%)`,
         i
@@ -74,8 +76,8 @@ const init = () => {
   }
 };
 
+//-------------------------------------------------------
 // # ANIMATION FUNCTION
-
 const animate = () => {
   requestAnimationFrame(animate);
   if (
