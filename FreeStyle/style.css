@@ -14,7 +14,9 @@ body {
 }
 
 #canvas {
-  background-color: aquamarine;
+  /* background-color: hsl(51, 100%, 50%); */
+  /* background-color: hsl(236, 100%, 75%); */
+
   position: absolute;
   left: 50%;
   top: 50%;
