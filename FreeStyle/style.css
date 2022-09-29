@@ -23,3 +23,71 @@ body {
   /* transform: translate(-50%, -50%); */
   translate: -50% -50%;
 }
+
+#controls {
+  position: absolute;
+  padding: 1vh;
+  margin: 0.5vh;
+  /* border: 2px solid white; */
+  width: 220px;
+  /* background-color: rgba(255, 255, 255, 0.15); */
+}
+
+button {
+  padding: 8px 40px;
+  width: 200px;
+  font-size: 16px;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+#details {
+  position: absolute;
+  color: #ccc;
+  bottom: 0;
+  font-size: 12px;
+  height: 100px;
+  white-space: pre-wrap;
+}
+
+a {
+  text-decoration: none;
+}
+
+#manual-controls {
+  position: absolute;
+  padding: 1vh;
+  margin: 0.5vh;
+  border: 1px solid rgba(255, 255, 255, 0.404);
+  width: 260px;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  translate: 0 -80%;
+  transition: translate 150ms ease-in-out;
+}
+
+#manual-controls:hover {
+  translate: 0 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+label,
+input {
+  color: #fff;
+  font-size: 12px;
+}
+
+input {
+  height: 6px;
+}
+
+.menu {
+  color: white;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 0;
+}
