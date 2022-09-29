@@ -18,6 +18,8 @@ let saturation = 100;
 let lightness = 50;
 let color = `hsl(200, 100%, 50%)`;
 let lineWidth = Math.floor(Math.random() * 10 + 10);
+let branchDir = 0;
+let displayCircles = 1;
 
 // let shadowColor = `hsla(200, 100%, 50%, 0.7)`;
 let shadowColor = `hsla(0, 0%, 0%, 0.7)`;
@@ -39,31 +41,41 @@ const drawBranch = (level) => {
   ctx.stroke();
 
   for (let i = 0; i < branches; i++) {
-    ctx.save();
-    ctx.translate(size - (size / branches) * i, 0);
-    ctx.scale(scale, scale);
-    ctx.rotate(spread);
-    drawBranch(level + 1);
-    ctx.restore();
+    if (branchDir === 0 || branchDir === 1) {
+      ctx.save();
+      ctx.translate(size - (size / branches) * i, 0);
+      ctx.scale(scale, scale);
+      ctx.rotate(spread);
+      drawBranch(level + 1);
+      ctx.restore();
+    }
 
-    ctx.save();
-    ctx.translate(size - (size / branches) * i, 0);
-    ctx.rotate(-spread);
-    ctx.scale(scale, scale);
-    drawBranch(level + 1);
-    ctx.restore();
+    if (branchDir === 0 || branchDir === -1) {
+      ctx.save();
+      ctx.translate(size - (size / branches) * i, 0);
+      ctx.rotate(-spread);
+      ctx.scale(scale, scale);
+      drawBranch(level + 1);
+      ctx.restore();
+    }
+
+    if (displayCircles === 1) {
+      ctx.beginPath();
+      ctx.arc(0, size, size * 0.1, 0, Math.PI * 2, false);
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
   }
 };
 
 // Drawing fractals combining multiple branches
 const drawFractal = () => {
   ctx.save();
-
   color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   ctx.strokeStyle = color;
-  ctx.shadowColor = shadowColor;
-  ctx.lineWidth = lineWidth;
+  ctx.shadowColor = `hsla(0, 0%, 0%, 0.7)`;
 
+  ctx.lineWidth = lineWidth;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.translate(canvas.width / 2, canvas.height / 2);
 
@@ -71,6 +83,7 @@ const drawFractal = () => {
     ctx.rotate((Math.PI * 2) / sides);
     drawBranch(0);
   }
+
   ctx.restore();
 };
 drawFractal();
@@ -81,9 +94,11 @@ const randomizeFractals = () => {
   saturation = 100;
   lightness = 50;
   sides = Math.floor(Math.random() * (9 - 2) + 3);
-  scale = Math.random() * 0.4 + 0.2;
+  scale = Math.random() * 0.5 + 0.3;
   spread = Math.random() * 3.1 + 0.1;
   lineWidth = Math.floor(Math.random() * 15 + 5);
+  shadowColor = `hsla(0, 0%, 0%, 0.7)`;
+  displayCircles = Math.floor(Math.random() * 2);
   randomizeButton.style.backgroundColor = `hsla(${hue}, ${saturation}%, ${lightness}%,0.8)`;
 };
 
@@ -95,6 +110,8 @@ const getDetails = () => {
   scale: ${scale}
   spread: ${spread}
   lineWidth: ${lineWidth}
+  maxLevel: ${maxLevel}
+  branches: ${branches}
   `;
 };
 
@@ -103,6 +120,12 @@ const getDetails = () => {
 addEventListener('resize', () => {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
+  size =
+    canvas.width < canvas.height ? canvas.width * 0.25 : canvas.height * 0.25;
+  ctx.shadowColor = `hsla(0, 0%, 0%, 0.7)`;
+  ctx.shadowBlur = 10;
+  ctx.shadowOffsetX = 10;
+  ctx.shadowOffsetY = 5;
   drawFractal();
 });
 
@@ -134,6 +157,18 @@ const labelScale = document.querySelector('[for = "scale"]');
 
 const sliderLineWidth = document.getElementById('line-width');
 const labelLineWidth = document.querySelector('[for = "line-width"]');
+
+const sliderCircle = document.getElementById('circles');
+const labelCircle = document.querySelector('[for = "circles"]');
+
+const sliderBranchDir = document.getElementById('branch-direction');
+const labelBranchDir = document.querySelector('[for = "branch-direction"]');
+
+const sliderMaxLevel = document.getElementById('max-level');
+const labelMaxLevel = document.querySelector('[for = "max-level"]');
+
+const sliderBranches = document.getElementById('branches');
+const labelBranches = document.querySelector('[for = "branches"]');
 
 //Event Listeners
 sliderHue.addEventListener('change', (e) => {
@@ -184,6 +219,34 @@ sliderLineWidth.addEventListener('change', (e) => {
   updateSliders();
 });
 
+sliderCircle.addEventListener('change', (e) => {
+  displayCircles = e.target.valueAsNumber;
+  drawFractal();
+  getDetails();
+  updateSliders();
+});
+
+sliderBranchDir.addEventListener('change', (e) => {
+  branchDir = e.target.valueAsNumber;
+  drawFractal();
+  getDetails();
+  updateSliders();
+});
+
+sliderMaxLevel.addEventListener('change', (e) => {
+  maxLevel = e.target.valueAsNumber;
+  drawFractal();
+  getDetails();
+  updateSliders();
+});
+
+sliderBranches.addEventListener('change', (e) => {
+  branches = e.target.valueAsNumber;
+  drawFractal();
+  getDetails();
+  updateSliders();
+});
+
 const updateSliders = () => {
   sliderSpread.value = spread;
   labelSpread.innerText = 'Spread: ' + spread.toFixed(2);
@@ -203,6 +266,15 @@ const updateSliders = () => {
 
   sliderLineWidth.value = lineWidth;
   labelLineWidth.innerText = 'lineWidth: ' + lineWidth;
+
+  sliderBranchDir.value = branchDir;
+  labelBranchDir.innerText = 'Br. Direction: ' + branchDir;
+
+  sliderMaxLevel.value = maxLevel;
+  labelMaxLevel.innerText = 'Max Level: ' + maxLevel;
+
+  sliderBranches.value = branches;
+  labelBranches.innerText = 'Branches: ' + branches;
 
   randomizeButton.style.backgroundColor = `hsla(${hue}, ${saturation}%, ${lightness}%,0.8)`;
   randomizeButton.style.color = lightness > 75 ? '#000' : '#fff';
