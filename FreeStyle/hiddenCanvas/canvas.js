@@ -297,19 +297,19 @@ const labelEndPtY = document.querySelector('[for = "endY"]');
 
 const updateBezier = () => {
   sliderCtrlPt1X.value = ctrl1X;
-  labelCtrlPt1X.innerText = 'Ctrl Pt 1 X: ' + ctrl1X;
+  labelCtrlPt1X.innerText = 'Ctrl Pt 1 X: ' + ctrl1X.toFixed(2);
   sliderCtrlPt1Y.value = ctrl1Y;
-  labelCtrlPt1Y.innerText = 'Ctrl Pt 1 Y: ' + ctrl1Y;
+  labelCtrlPt1Y.innerText = 'Ctrl Pt 1 Y: ' + ctrl1Y.toFixed(2);
 
   sliderCtrlPt2X.value = ctrl2X;
-  labelCtrlPt2X.innerText = 'Ctrl Pt 2 X: ' + ctrl2X;
+  labelCtrlPt2X.innerText = 'Ctrl Pt 2 X: ' + ctrl2X.toFixed(2);
   sliderCtrlPt2Y.value = ctrl2Y;
-  labelCtrlPt2Y.innerText = 'Ctrl Pt 2 Y: ' + ctrl2Y;
+  labelCtrlPt2Y.innerText = 'Ctrl Pt 2 Y: ' + ctrl2Y.toFixed(2);
 
   sliderEndPtX.value = endX;
-  labelEndPtX.innerText = 'End Pt X: ' + endX;
+  labelEndPtX.innerText = 'End Pt X: ' + endX.toFixed(2);
   sliderEndPtY.value = endY;
-  labelEndPtY.innerText = 'End Pt Y: ' + endY;
+  labelEndPtY.innerText = 'End Pt Y: ' + endY.toFixed(2);
 };
 
 //event listeners
