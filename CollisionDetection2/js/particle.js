@@ -1,13 +1,13 @@
-import { randomColor, getDistance, resolveCollision } from "./helper.js";
+import { randomColor, getDistance, resolveCollision } from './helper.js';
 
 export default class Particle {
-  #colors = ["#37e6dd", "#0AA605", "#F2B705", "#F25C05", "#F21616"];
+  #colors = ['#37e6dd', '#0AA605', '#F2B705', '#F25C05', '#F21616'];
 
-  ctx = canvas.getContext("2d");
+  ctx = canvas.getContext('2d');
 
   constructor(x, y, radius, color) {
     this.navHeight = document
-      .querySelector("nav")
+      .querySelector('nav')
       .getBoundingClientRect().height;
     this.radius = radius || Math.random() * (12 - 8) + 8;
     this.x = x || Math.random() * window.innerWidth;
@@ -41,7 +41,7 @@ export default class Particle {
       if (this === particles[i]) continue;
       if (
         getDistance(this.x, this.y, particles[i].x, particles[i].y) -
-          this.radius * 2 <
+          (this.radius + particles[i].radius) <
         0
       ) {
         resolveCollision(this, particles[i]);

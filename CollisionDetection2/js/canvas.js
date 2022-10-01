@@ -1,14 +1,14 @@
-import MouseXY from "./mouse.js";
-import Particle from "./particle.js";
-import { randomIntFromRange, getDistance } from "./helper.js";
+import MouseXY from './mouse.js';
+import Particle from './particle.js';
+import { randomIntFromRange, getDistance } from './helper.js';
 
 // Global
-const canvas = document.querySelector("canvas");
-let navHeight = document.querySelector("nav").getBoundingClientRect().height;
+const canvas = document.querySelector('canvas');
+let navHeight = document.querySelector('nav').getBoundingClientRect().height;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight - navHeight - 4;
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext('2d');
 let mouse;
 
 // Init function
@@ -24,7 +24,8 @@ const init = () => {
     if (i !== 0) {
       for (let j = 0; j < particles.length; j++) {
         if (
-          getDistance(x, y, particles[j].x, particles[j].y) - radius * 2 <
+          getDistance(x, y, particles[j].x, particles[j].y) -
+            (radius + particles[j].radius) <
           0
         ) {
           x = randomIntFromRange(radius, canvas.width - radius);
@@ -45,7 +46,7 @@ const animate = () => {
   particles.forEach((particle) => particle.update(particles, mouse));
 };
 
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight - navHeight - 4;
   init();
@@ -55,7 +56,7 @@ const onMouseMove = (e) => {
   mouse = new MouseXY(e.x, e.y);
 };
 
-window.addEventListener("mousemove", onMouseMove);
+window.addEventListener('mousemove', onMouseMove);
 
 init();
 animate();

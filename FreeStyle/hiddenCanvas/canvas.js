@@ -13,7 +13,7 @@ let maxLevel = 12;
 let sides = 10;
 let spread = -0.2;
 let scale = 0.85;
-let lineWidth = 15;
+let lineWidth = 30;
 let displayCircles = 1;
 let circleRadius = 40;
 
@@ -31,12 +31,13 @@ ctx.shadowOffsetY = 5;
 // bezier - curve init
 let pointX = 0;
 let pointY = size;
+
 let ctrl1X = 0;
-let ctrl1Y = size * spread * -3;
-let ctrl2X = size * 5;
-let ctrl2Y = size * 10 * spread;
-let endX = 300;
-let endY = -80;
+let ctrl1Y = -3;
+let ctrl2X = 5;
+let ctrl2Y = 10;
+let endX = 0;
+let endY = 0;
 
 // canvas values
 ctx.lineCap = 'round';
@@ -45,7 +46,15 @@ const drawBranch = (level) => {
   if (level > maxLevel) return;
   ctx.beginPath();
   ctx.moveTo(pointX, pointY);
-  ctx.bezierCurveTo(ctrl1X, ctrl1Y, ctrl2X, ctrl2Y, endX, endY);
+  // ctx.bezierCurveTo(ctrl1X, ctrl1Y, ctrl2X, ctrl2Y, endX, endY);
+  ctx.bezierCurveTo(
+    size * ctrl1X,
+    size * spread * ctrl1Y,
+    size * ctrl2X,
+    size * ctrl2Y * spread,
+    endX,
+    endY
+  );
 
   ctx.lineTo(size, 0);
   ctx.stroke();
@@ -93,10 +102,10 @@ const randomizeFractals = () => {
   hue = Math.random() * 360;
   saturation = 100;
   lightness = 50;
-  sides = Math.floor(Math.random() * (9 - 2) + 3);
+  sides = Math.floor(Math.random() * 18 + 2);
   scale = Math.random() * 0.5 + 0.3;
-  spread = Math.random() * 3.1 + 0.1;
-  lineWidth = Math.floor(Math.random() * 15 + 5);
+  spread = Math.random() * 0.6 - 0.3;
+  lineWidth = Math.floor(Math.random() * 20 + 10);
   shadowColor = `hsla(0, 0%, 0%, 0.7)`;
   displayCircles = Math.floor(Math.random() * 2);
   randomizeButton.style.backgroundColor = `hsla(${hue}, ${saturation}%, ${lightness}%,0.8)`;
