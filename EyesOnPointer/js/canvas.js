@@ -74,8 +74,8 @@ addEventListener('mousemove', (e) => {
 });
 
 randomizeButton.addEventListener('click', () => {
-  minRadius = Math.random() * 50;
-  maxRadius = Math.random() * 150;
+  minRadius = Math.random() * 50 + 5;
+  maxRadius = Math.random() * 150 + 5;
 
   minRadius > maxRadius
     ? ([minRadius, maxRadius] = [minRadius, maxRadius])
