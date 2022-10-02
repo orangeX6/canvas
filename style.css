@@ -18,7 +18,7 @@
 } */
 
 body {
-  padding: 8vh 0;
+  padding: 4vh 0;
   height: 82vh;
   /* display: flex; */
   /* align-items: center; */
@@ -28,7 +28,7 @@ body {
 }
 
 .header {
-  padding: 3vh;
+  padding: 2.5vh;
   text-align: center;
   background: rgba(255, 255, 255, 0.2);
   color: white;
