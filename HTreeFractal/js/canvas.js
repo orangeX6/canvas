@@ -6,7 +6,6 @@ canvas.height = innerHeight;
 const ctx = canvas.getContext('2d');
 
 // Variables
-
 let startX = canvas.width / 2;
 let startY = canvas.height - 80;
 let len = 150;
@@ -15,9 +14,15 @@ let branchWidth = 30;
 let strokeColor = 'hsl(25, 76%, 31%)';
 let fillColor = 'hsl(120, 100%, 25%)';
 
-let curve = 10;
-let curve2 = 10;
-let curve3 = 0;
+let rightCurve = 10;
+let leftCurve = 10;
+let bezierCurve = 0;
+let leafDensity = 8;
+let leaves = 1;
+let leafSize = 10;
+let leftBranchScaling = 0.75;
+let rightBranchScaling = 0.75;
+let branchWidthScale = 0.6;
 
 //colors
 let strokeRed = 139;
@@ -54,24 +59,37 @@ const drawTree = (
   // ctx.lineTo(0, -len);
 
   angle > 0
-    ? ctx.bezierCurveTo(curve3, -len / 2, curve3, -len / 2, 0, -len)
-    : ctx.bezierCurveTo(curve3, -len / 2, -curve3, -len / 2, 0, -len);
+    ? ctx.bezierCurveTo(bezierCurve, -len / 2, bezierCurve, -len / 2, 0, -len)
+    : ctx.bezierCurveTo(bezierCurve, -len / 2, -bezierCurve, -len / 2, 0, -len);
   ctx.stroke();
 
-  if (len < 8) {
+  if (len < leafDensity) {
     // leafs
-    ctx.beginPath();
-    ctx.arc(0, -len, 10, 0, Math.PI / 2, false);
-    // ctx.shadowColor = fillColor;
-    // ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-    // ctx.shadowBlur = 15;
-    ctx.fill();
+    if (leaves === 1) {
+      ctx.beginPath();
+      ctx.arc(0, -len, leafSize, 0, Math.PI / 2, false);
+      ctx.shadowColor = 'fillColor';
+      ctx.shadowBlur = 15;
+      ctx.fill();
+    }
     ctx.restore();
     return;
   }
 
-  drawTree(0, -len, len * 0.75, angle + curve, branchWidth * 0.6);
-  drawTree(0, -len, len * 0.75, angle - curve2, branchWidth * 0.6);
+  drawTree(
+    0,
+    -len,
+    len * rightBranchScaling,
+    angle + rightCurve,
+    branchWidth * branchWidthScale
+  );
+  drawTree(
+    0,
+    -len,
+    len * leftBranchScaling,
+    angle - leftCurve,
+    branchWidth * branchWidthScale
+  );
 
   ctx.restore();
 };
@@ -98,7 +116,7 @@ const generateRandomTree = () => {
   startY = canvas.height - 80;
   len = Math.floor(Math.random() * 20 + 200);
   angle = 0;
-  branchWidth = Math.random() * 180 + 1;
+  branchWidth = Math.random() * 120 + 1;
 
   //colors
   strokeRed = Math.random() * 255;
@@ -109,11 +127,20 @@ const generateRandomTree = () => {
   fillGreen = Math.random() * 255;
   fillBlue = Math.random() * 255;
   fillColor = `rgb(${fillRed}, ${fillGreen}, ${fillBlue})`;
+  backgroundHue = Math.random() * 360;
+  backgroundSaturation = Math.random() * 50 + 50;
+  backgroundLightness = Math.random() * 25 + 75;
+  backgroundColor = `rgb(${backgroundHue}, ${backgroundSaturation}%, ${backgroundLightness}%)`;
   updateColorSliders();
 
-  curve = Math.random() * 20 + 10;
-  curve2 = Math.random() * 20 + 10;
-  curve3 = Math.random() * 50;
+  rightCurve = Math.random() * 30;
+  leftCurve = Math.random() * 30;
+  bezierCurve = Math.random() * 20;
+  leafSize = Math.random() * 8 + 6;
+  branchWidthScale = Math.random() * 0.4 + 0.4;
+  leafDensity = 8;
+
+  updateControlSliders();
 
   drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
   generateTree.style.setProperty('background', strokeColor);
@@ -123,19 +150,152 @@ generateTree.addEventListener('click', () => {
   generateRandomTree();
 });
 
-addEventListener('resize', () => {
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-  drawTree(
-    canvas.width / 2,
-    canvas.height - 80,
-    150,
-    0,
-    30,
-    'saddlebrown',
-    'green'
-  );
-  generateTree.style.setProperty('background', 'saddlebrown');
+// MANUAL CONTROLS
+const updateControlSliders = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  sliderHeight.value = len;
+  labelHeight.innerText = 'Height: ' + len.toFixed(0);
+
+  sliderWidth.value = branchWidth;
+  labelWidth.innerText = 'Width: ' + branchWidth.toFixed(0);
+
+  sliderAngle.value = angle;
+  labelAngle.innerText = 'Angle: ' + angle.toFixed(0);
+
+  sliderLeftCurve.value = leftCurve;
+  labelLeftCurve.innerText = 'Left Curve: ' + leftCurve.toFixed(0);
+
+  sliderRightCurve.value = rightCurve;
+  labelRightCurve.innerText = 'Right Curve: ' + rightCurve.toFixed(0);
+
+  sliderBezierCurve.value = bezierCurve;
+  labelBezierCurve.innerText = 'Bezier Curve: ' + bezierCurve.toFixed(0);
+
+  sliderLeaves.value = leaves;
+  labelLeaves.innerText = 'Leaves: ' + leaves.toFixed(0);
+
+  sliderLeafDensity.value = leafDensity;
+  labelLeafDensity.innerText = 'Leaf Density: ' + leafDensity.toFixed(0);
+
+  sliderLeafSize.value = leafSize;
+  labelLeafSize.innerText = 'Leaf Size: ' + leafSize.toFixed(0);
+
+  sliderLeftBranchScaling.value = leftBranchScaling;
+  labelLeftBranchScaling.innerText =
+    'L. Br. Scaling: ' + leftBranchScaling.toFixed(2);
+
+  sliderRightBranchScaling.value = rightBranchScaling;
+  labelRightBranchScaling.innerText =
+    'R. Br. Scaling: ' + rightBranchScaling.toFixed(2);
+
+  sliderBranchWidthScale.value = branchWidthScale;
+  labelBranchWidthScale.innerText =
+    'Br. width Scale: ' + branchWidthScale.toFixed(2);
+};
+
+// get inputs
+const sliderHeight = document.getElementById('height');
+const labelHeight = document.querySelector('[for = "height"]');
+const sliderWidth = document.getElementById('width');
+const labelWidth = document.querySelector('[for = "width"]');
+const sliderAngle = document.getElementById('angle');
+const labelAngle = document.querySelector('[for = "angle"]');
+const sliderLeftCurve = document.getElementById('left-curve');
+const labelLeftCurve = document.querySelector('[for = "left-curve"]');
+const sliderRightCurve = document.getElementById('right-curve');
+const labelRightCurve = document.querySelector('[for = "right-curve"]');
+const sliderBezierCurve = document.getElementById('bezier-curve');
+const labelBezierCurve = document.querySelector('[for = "bezier-curve"]');
+const sliderLeaves = document.getElementById('leaves');
+const labelLeaves = document.querySelector('[for = "leaves"]');
+const sliderLeafDensity = document.getElementById('leaf-density');
+const labelLeafDensity = document.querySelector('[for = "leaf-density"]');
+const sliderLeafSize = document.getElementById('leaf-size');
+const labelLeafSize = document.querySelector('[for = "leaf-size"]');
+const sliderLeftBranchScaling = document.getElementById('left-branch-scaling');
+const labelLeftBranchScaling = document.querySelector(
+  '[for = "left-branch-scaling"]'
+);
+const sliderRightBranchScaling = document.getElementById(
+  'right-branch-scaling'
+);
+const labelRightBranchScaling = document.querySelector(
+  '[for = "right-branch-scaling"]'
+);
+const sliderBranchWidthScale = document.getElementById('br-wd-scale');
+const labelBranchWidthScale = document.querySelector('[for = "br-wd-scale"]');
+
+//Event Listeners
+sliderHeight.addEventListener('change', (e) => {
+  len = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderWidth.addEventListener('change', (e) => {
+  branchWidth = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderAngle.addEventListener('change', (e) => {
+  angle = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderLeftCurve.addEventListener('change', (e) => {
+  leftCurve = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderRightCurve.addEventListener('change', (e) => {
+  rightCurve = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderBezierCurve.addEventListener('change', (e) => {
+  bezierCurve = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderLeaves.addEventListener('change', (e) => {
+  leaves = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderLeafDensity.addEventListener('change', (e) => {
+  leafDensity = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderLeafSize.addEventListener('change', (e) => {
+  leafSize = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderLeftBranchScaling.addEventListener('change', (e) => {
+  leftBranchScaling = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderRightBranchScaling.addEventListener('change', (e) => {
+  rightBranchScaling = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+sliderBranchWidthScale.addEventListener('change', (e) => {
+  branchWidthScale = e.target.valueAsNumber;
+  updateControlSliders();
+  drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
 });
 
 // COLOR EVENTS
@@ -245,4 +405,19 @@ backgroundSliderLightness.addEventListener('change', (e) => {
   backgroundLightness = e.target.valueAsNumber;
   updateColorSliders();
   drawTree(startX, startY, len, angle, branchWidth, strokeColor, fillColor);
+});
+
+addEventListener('resize', () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  drawTree(
+    canvas.width / 2,
+    canvas.height - 80,
+    150,
+    0,
+    30,
+    'saddlebrown',
+    'green'
+  );
+  generateTree.style.setProperty('background', 'saddlebrown');
 });
