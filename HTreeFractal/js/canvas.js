@@ -13,6 +13,7 @@ let angle = 0;
 let branchWidth = 30;
 let strokeColor = 'hsl(25, 76%, 31%)';
 let fillColor = 'hsl(120, 100%, 25%)';
+let backgroundColor = 'hsl(0, 100%, 100%)';
 
 let rightCurve = 10;
 let leftCurve = 10;
