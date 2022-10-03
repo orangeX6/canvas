@@ -14,6 +14,59 @@
 <body>
   <canvas id="canvas"></canvas>
   <button id="generate-tree">Randomize Tree!</button>
+
+
+  <div id="color">
+    <div class="color-menu">
+      <p>Colors</p>
+    </div>
+
+    <div class="color-controls">
+      <ul>
+        <li>
+          <p>Stroke</p>
+        </li>
+        <li><input type="range" min="0" max="255" step="1" value="0" id="redS" />
+          <label for="redS"> Red</label></li>
+
+        <li>
+          <input type="range" min="0" max="255" step="1" value="75" id="greenS" />
+          <label for="greenS"> Green</label></li>
+
+        <li>
+          <input type="range" min="0" max="255" step="1" value="50" id="blueS" />
+          <label for="blueS"> Blue</label></li>
+        <li>
+          <p>Fill</p>
+        </li>
+
+        <li><input type="range" min="0" max="255" step="1" value="0" id="redF" />
+          <label for="redF"> Red</label></li>
+
+        <li>
+          <input type="range" min="0" max="255" step="1" value="75" id="greenF" />
+          <label for="greenF"> Green</label></li>
+
+        <li>
+          <input type="range" min="0" max="255" step="1" value="50" id="blueF" />
+          <label for="blueF"> Blue</label></li>
+
+        <p>Background</p>
+        </li>
+
+        <li><input type="range" min="0" max="360" step="1" value="0" id="hueBg" />
+          <label for="hueBg"> Hue</label></li>
+
+        <li>
+          <input type="range" min="0" max="100" step="1" value="75" id="saturationBg" />
+          <label for="saturationBg"> Saturation</label></li>
+
+        <li>
+          <input type="range" min="0" max="100" step="1" value="100" id="lightnessBg" />
+          <label for="lightnessBg"> Lightness</label></li>
+      </ul>
+    </div>
+  </div>
 </body>
 
 </html>
