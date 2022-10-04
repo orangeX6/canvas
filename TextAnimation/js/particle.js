@@ -43,6 +43,10 @@ export default class Particle {
       this.x -= directionX;
       this.y -= directionY;
       this.ctx.fillStyle = this.color;
+      // this.ctx.shadowColor = `rgba(255,255,255,1)`;
+      // this.ctx.shadowOffsetX = 10;
+      // this.ctx.shadowOffsetY = 10;
+      // this.ctx.shadowBlur = 2;
       this.ctx.fill();
     } else {
       if (this.baseX !== this.x) {
