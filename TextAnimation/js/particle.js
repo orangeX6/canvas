@@ -3,19 +3,21 @@ export default class Particle {
   ctx = canvas.getContext('2d');
   #mouse = {};
 
-  constructor(x, y, radius) {
+  constructor(x, y, color, radius) {
     this.x = x;
     this.y = y;
     this.radius = radius || 2;
     this.baseX = this.x;
     this.baseY = this.y;
     this.density = Math.random() * 30 + 1;
+    this.distance = 0;
+    this.color = color;
   }
 
   draw() {
     this.ctx.beginPath();
     this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    this.ctx.fillStyle = 'pink';
+    this.ctx.fillStyle = 'white';
     this.ctx.fill();
     // this.ctx.strokeStyle = this.color;
     // this.ctx.stroke();
@@ -26,6 +28,7 @@ export default class Particle {
     let dx = mouse.x - this.x;
     let dy = mouse.y - this.y;
     let distance = Math.sqrt(dx * dx + dy * dy);
+    this.distance = distance;
 
     let forceDirectionX = dx / distance;
     let forceDirectionY = dy / distance;
@@ -39,6 +42,8 @@ export default class Particle {
     if (distance < mouse.radius) {
       this.x -= directionX;
       this.y -= directionY;
+      this.ctx.fillStyle = this.color;
+      this.ctx.fill();
     } else {
       if (this.baseX !== this.x) {
         let dx = this.x - this.baseX;

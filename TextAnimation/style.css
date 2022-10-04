@@ -22,10 +22,6 @@ canvas {
   left: 0;
 }
 
-#canvas2 {
-  visibility: hidden;
-}
-
 .skip {
   position: fixed;
   top: 0;
