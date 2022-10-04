@@ -11,6 +11,7 @@ body {
   margin: 0;
   overflow: hidden;
   background: black;
+  /* position: relative; */
 }
 
 canvas {
@@ -19,4 +20,25 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+#canvas2 {
+  visibility: hidden;
+}
+
+.skip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background-color: #121212;
+  color: #fff;
+  padding: 0.5rem;
+  translate: 0 -100%;
+  transition: translate 150ms ease-in-out;
+}
+
+.skip:focus {
+  translate: 0;
 }

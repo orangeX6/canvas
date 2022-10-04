@@ -5,18 +5,17 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = innerWidth;
 canvas.height = innerHeight;
-const mouse = new Mouse(-100, -100, 250);
+const mouse = new Mouse(-100, -100, 150);
 const numberOfParticles = 500;
 const particles = [];
 
 ctx.fillStyle = 'white';
 ctx.font = '30px Bahnschrift';
 ctx.fillText('A', 20, 50);
-const data = ctx.getImageData(0, 0, 100, 100);
+const textCoordinates = ctx.getImageData(0, 0, 100, 100);
 
 const init = () => {
   particles.splice(0);
-
   for (let i = 0; i < numberOfParticles; i++) {
     let x = Math.random() * canvas.width;
     let y = Math.random() * canvas.height;

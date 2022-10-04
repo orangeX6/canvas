@@ -6,7 +6,7 @@ export default class Particle {
   constructor(x, y, radius) {
     this.x = x;
     this.y = y;
-    this.radius = radius || 3;
+    this.radius = radius || 2;
     this.baseX = this.x;
     this.baseY = this.y;
     this.density = Math.random() * 30 + 1;
